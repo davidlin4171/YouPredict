@@ -19,7 +19,7 @@
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-|  Title      |                        |
+|  Title      | YouPredict: Predicting YouTube Video Trending Dynamics |
 | System URL  |                        |
 | Video Link  |                        |
 
