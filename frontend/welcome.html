@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>411 Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="#home" class="w3-bar-item w3-button"> YouPredict</a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#statistics" class="w3-bar-item w3-button">Statistics</a>
+      <a href="#crud" class="w3-bar-item w3-button">Crud</a>
+      <a href="#advancedQuery" class="w3-bar-item w3-button">Advanced Query</a>
+      <a href="#predictiveComponent" class="w3-bar-item w3-button">Predictive Component</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+
+  <!-- Statistics Section -->
+  <div class="w3-container w3-padding-32" id="statistics">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Statistics</h3>
+  </div>
+  <!-- Country Dropdown -->
+  <div>
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <!-- Populate with dynamic data from backend using JavaScript -->
+      <option value="country1">Country 1</option>
+      <option value="country2">Country 2</option>
+      <!-- Add more options as needed -->
+    </select>
+  </div>
+   <!-- Search Bars -->
+   <label for="channelName">Channel Name</label>
+   <input type="text" id="channelName" name="channelName">
+ 
+   <label for="tags">Tags</label>
+   <input type="text" id="tags" name="tags">
+ 
+   <button onclick="search()">Search</button>
+ 
+   <!-- Data Grid -->
+   <div id="dataGrid">
+     <!-- Display data dynamically using JavaScript -->
+   </div>
+ </div>
+
+ 
+  
+  <!-- Crud Section -->
+  <div class="w3-container w3-padding-32" id="crud">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Crud</h3>
+    <div class="form">
+        <label for="videoName">Video Name:</label>
+        <input type="text" id="videoNameInput">
+
+        <label for="review">Review:</label>
+        <input type="text" id="reviewInput">
+
+        <button onclick="submitReview()">Submit</button>
+    </div>
+
+    <script>
+        function submitReview() {
+            var videoName = document.getElementById("videoNameInput").value;
+            var review = document.getElementById("reviewInput").value;
+
+            if (movieName.trim() === '' || review.trim() === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            fetch('http://localhost:3002/api/insert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    videoName: videoName,
+                    videoReview: review
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Success insert');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error during insert');
+                });
+        }
+    </script>
+  </div>
+
+
+  <!-- Advanced Query Section -->
+  <div class="w3-container w3-padding-32" id="advancedQuery">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Advanced Query</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+      occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+      laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+
+    <!-- Predictive Component Section -->
+    <div class="w3-container w3-padding-32" id="predictiveComponent">
+        <div class="w3-container w3-padding-32" id="statistics">
+            <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Predictive Component</h3>
+          </div>
+           <!-- Search Bars -->
+            <div>
+                <label for="likes">Likes</label>
+                <input type="text" id="likes" name="likes">
+            </div>
+            <div>
+                <label for="commentCount">Comment Count</label>
+                <input type="text" id="commentCount" name="commentCount">
+            </div>
+            <div>
+                <label for="countryCode">Country Code</label>
+                <input type="text" id="countryCode" name="countryCode">
+            </div>
+         
+            <div> 
+                <p> Your Predicted View Count is:</p>
+                <textarea></textarea>
+            </div>
+           
+         
+           <!-- Data Grid -->
+           <div id="dataGrid">
+             <!-- Display data dynamically using JavaScript -->
+           </div>
+    </div>
+  
+
+<!-- End page content -->
+</div>
+
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+  <p>Created by David, Daivaksh, Priyansh, and Navya</a></p>
+</footer>
+
+</body>
+</html>
