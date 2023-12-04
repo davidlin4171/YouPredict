@@ -82,7 +82,7 @@ app.post("/crud/create", (req, res) => {
   
   let channelId = 'UC0uRT_armQXqds_rjTjqJ23';
   let videoId = generateRandomId();
-  let currentDateTime = getCurrentDateTime();
+  let currentDate = getCurrentDateTime();
   let view_count = 0;
   let likes = 0;
   let dislikes = 0;
@@ -90,10 +90,23 @@ app.post("/crud/create", (req, res) => {
   let thumbnail_link = null;
   let comments_disabled = false;
   let ratings_disabled = false;
-  let countryCode = getCountryCode(countryName);
 
-  let query = `INSERT INTO channel(${})
+  let insert_query = `INSERT INTO channel(channel_id, channel_title)
+  VALUES (${channelId}, ${channelTitle});
+  
+  INSERT INTO video(video_id, channel_id, publishedAt, title, thumbnail_link, description, country)
+  VALUES (${videoId}, ${channelId}, ${currentDate}, ${videoTitle}, ${thumbnail_link}, ${description}, ${countryName});
+
+  INSERT INTO video_stats(trending_date, video_id, view_count, likes, dislikes, comment_count, comments_disabled, ratings_disabled)
+  VALUES (${currentDate}, ${videoId}, ${view_count}, ${likes}, ${dislikes}, ${comment_count}, ${comments_disabled});
+
+  INSERT INTO category(categoryId, video_id, tags)
+  VALUES(${categoryId}, ${videoId}, ${tags});
   `;
+  con.query(insert_query, (error, results, fields) => {
+     if(error) throw error;
+     console.log(results)
+  });
 });
 
 
