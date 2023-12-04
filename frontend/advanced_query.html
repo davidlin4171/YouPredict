@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Query - YouPredict</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+        <a href="index.html" class="w3-bar-item w3-button">YouPredict</a>
+        <div class="w3-right w3-hide-small">
+            <a href="statistics.html" class="w3-bar-item w3-button">Statistics</a>
+            <a href="crud.html" class="w3-bar-item w3-button">Crud</a>
+            <a href="advanced_query.html" class="w3-bar-item w3-button">Advanced Query</a>
+            <a href="predictive_component.html" class="w3-bar-item w3-button">Predictive Component</a>
+        </div>
+    </div>
+</div>
+
+<!-- Advanced Query Section -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+    <div class="w3-container w3-padding-32" id="advancedQuery">
+        <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Advanced Query</h3>
+        
+        <!-- Dropdown for Country Selection -->
+        <select id="countrySelect" name="country">
+            <option value="Brazil">Brazil</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="Japan">Japan</option>
+        </select>
+
+        <button onclick="advancedQuery1()">Advanced Query 1</button>
+        <button style="margin-left: 20px;" onclick="advancedQuery2()">Advanced Query 2</button>
+        <div id="queryDescription" style="margin-top: 20px;"></div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+    <p>Created by David, Daivaksh, Priyansh, and Navya</p>
+</footer>
+
+<script>
+    function advancedQuery1() {
+        var description = "Select the most common categories that appear on YouTube’s trending page by selecting the categories that have appeared more than the average number of times each category has appeared on YouTube trending page since the last 20000 trending videos across 5 countries. Only considers videos that have been posted after 10-15-2023 (date can be changed). Output only has 5 rows.";
+        document.getElementById('queryDescription').innerText = description;
+
+        fetch('http://localhost:3002/advance-1', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ queryType: 'Advanced Query 1' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Advanced Query 1 data:', data);
+            // Handle the response data
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function advancedQuery2() {
+        var description = "The purpose of this SQL query is to get the average ratio of video views to likes for each channel, sorted in ascending order, and a list of up to 15 channel titles. In order to prevent division by zero, it filters to only include channels with videos that have at least one like. It also restricts the selection to channels with three or more videos. Further filtering these channels is done by using a HAVING condition, which selects only those with an average view-to-like ratio that is higher than the average ratio of views to likes for all videos (again, just liking videos). The result is a list of channels that not only have a higher engagement rate compared to the average but also have a significant presence on the platform in terms of content volume.";
+        document.getElementById('queryDescription').innerText = description;
+
+        fetch('http://localhost:3002/advance-2', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ queryType: 'Advanced Query 2' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Advanced Query 2 data:', data);
+            // Handle the response data
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
+</body>
+</html>

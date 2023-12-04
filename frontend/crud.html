@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD - YouPredict</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+        <a href="index.html" class="w3-bar-item w3-button">YouPredict</a>
+        <div class="w3-right w3-hide-small">
+            <a href="statistics.html" class="w3-bar-item w3-button">Statistics</a>
+            <a href="crud.html" class="w3-bar-item w3-button">Crud</a>
+            <a href="advanced_query.html" class="w3-bar-item w3-button">Advanced Query</a>
+            <a href="predictive_component.html" class="w3-bar-item w3-button">Predictive Component</a>
+        </div>
+    </div>
+</div>
+
+<!-- Crud Section -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+    <div class="w3-container w3-padding-32">
+        <h3><b>CREATE</b></h3>
+        <div>
+            <input type="text" placeholder="Channel ID" id="createChannelId"><br>
+            <input type="text" placeholder="Video Title" id="createVideoTitle"><br>
+            <input type="number" placeholder="Category ID" id="createCategoryId"><br>
+            <input type="text" placeholder="Tags" id="createTags"><br>
+            <input type="text" placeholder="Description" id="createDescription"><br>
+            <input type="text" placeholder="Country Name" id="createCountryName"><br>
+            <button onclick="createData()">Create Data</button>
+        </div>
+
+        <h3><b>UPDATE</b></h3>
+        <div>
+            <input type="text" placeholder="Video ID" id="updateVideoId"><br>
+            <input type="text" placeholder="Title" id="updateTitle"><br>
+            <input type="text" placeholder="Published At" id="updatePublishedAt"><br>
+            <input type="number" placeholder="Category ID" id="updateCategoryId"><br>
+            <input type="text" placeholder="Trending Date" id="updateTrendingDate"><br>
+            <input type="text" placeholder="Tags" id="updateTags"><br>
+            <button onclick="updateData()">Update Data</button>
+        </div>
+
+        <h3><b>DELETE</b></h3>
+        <div>
+            <input type="text" placeholder="Video ID" id="deleteVideoId"><br>
+            <button onclick="deleteData()">Delete Data</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+    <p>Created by David, Daivaksh, Priyansh, and Navya</p>
+</footer>
+
+<script>
+    function createData() {
+        var channelId = document.getElementById('createChannelId').value;
+        var videoTitle = document.getElementById('createVideoTitle').value;
+        var categoryId = document.getElementById('createCategoryId').value;
+        var tags = document.getElementById('createTags').value;
+        var description = document.getElementById('createDescription').value;
+        var countryName = document.getElementById('createCountryName').value;
+
+        fetch('your_create_endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                channelId: channelId, 
+                videoTitle: videoTitle, 
+                categoryId: categoryId, 
+                tags: tags, 
+                description: description, 
+                countryName: countryName 
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Create response:', data);
+            // Handle the response data
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function updateData() {
+        var videoId = document.getElementById('updateVideoId').value;
+        var title = document.getElementById('updateTitle').value;
+        var publishedAt = document.getElementById('updatePublishedAt').value;
+        var categoryId = document.getElementById('updateCategoryId').value;
+        var trendingDate = document.getElementById('updateTrendingDate').value;
+        var tags = document.getElementById('updateTags').value;
+
+        fetch('your_update_endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                videoId: videoId, 
+                title: title, 
+                publishedAt: publishedAt, 
+                categoryId: categoryId, 
+                trendingDate: trendingDate, 
+                tags: tags 
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Update response:', data);
+            // Handle the response data
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function deleteData() {
+        var videoId = document.getElementById('deleteVideoId').value;
+
+        fetch('your_delete_endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ videoId: videoId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Delete response:', data);
+            // Handle the response data
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
+
+</body>
+</html>

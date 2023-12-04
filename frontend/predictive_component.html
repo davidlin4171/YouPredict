@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predictive Component - YouPredict</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+        <a href="index.html" class="w3-bar-item w3-button">YouPredict</a>
+        <div class="w3-right w3-hide-small">
+            <a href="statistics.html" class="w3-bar-item w3-button">Statistics</a>
+            <a href="crud.html" class="w3-bar-item w3-button">Crud</a>
+            <a href="advanced_query.html" class="w3-bar-item w3-button">Advanced Query</a>
+            <a href="predictive_component.html" class="w3-bar-item w3-button">Predictive Component</a>
+        </div>
+    </div>
+</div>
+
+<!-- Predictive Component Section -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+    <div class="w3-container w3-padding-32" id="predictiveComponent">
+        <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Predicting View Count using Multiple Linear Regression</h3>
+        <p>Please input these values (Country code is from 1 to 5): </p>
+        
+        <label for="likes">Likes</label>
+        <input type="number" id="likes" name="likes"><br>
+
+        <label for="commentCount">Comment Count</label>
+        <input type="number" id="commentCount" name="commentCount"><br>
+
+        <label for="countryCode">Country Code</label>
+        <input type="number" id="countryCode" name="countryCode"><br>
+
+        <button onclick="calculateViewCount()">Calculate</button>
+
+        <p>Your Predicted View Count is:</p>
+        <textarea id="predictedViewCount"></textarea>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+    <p>Created by David, Daivaksh, Priyansh, and Navya</p>
+</footer>
+
+<script>
+    function calculateViewCount() {
+        var likes = document.getElementById('likes').value;
+        var commentCount = document.getElementById('commentCount').value;
+        var countryCode = document.getElementById('countryCode').value;
+
+        // ML model equation
+        var viewCount = 161300 + 23.70 * likes - 79.53 * commentCount + 121200 * countryCode;
+
+        document.getElementById('predictedViewCount').innerText = viewCount.toFixed(0); // Rounded to nearest whole number
+    }
+</script>
+
+</body>
+</html>
