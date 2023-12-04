@@ -26,7 +26,7 @@
     <div class="w3-container w3-padding-32">
         <h3><b>CREATE</b></h3>
         <div>
-            <input type="text" placeholder="Channel ID" id="createChannelId"><br>
+            <input type="text" placeholder="Channel Title" id="createChannelTitle"><br>
             <input type="text" placeholder="Video Title" id="createVideoTitle"><br>
             <input type="number" placeholder="Category ID" id="createCategoryId"><br>
             <input type="text" placeholder="Tags" id="createTags"><br>
@@ -43,6 +43,16 @@
             <input type="number" placeholder="Category ID" id="updateCategoryId"><br>
             <input type="text" placeholder="Trending Date" id="updateTrendingDate"><br>
             <input type="text" placeholder="Tags" id="updateTags"><br>
+            <input type="number" placeholder="View Count" id="updateViewCount"><br>
+            <input type="number" placeholder="Likes" id="updateLikes"><br>
+            <input type="number" placeholder="Dislikes" id="updateDislikes"><br>
+            <input type="number" placeholder="Comment Count" id="updateCommentCount"><br>
+            <input type="text" placeholder="Thumbnail Link" id="updateThumbnailLink"><br>
+            <input type="text" placeholder="Comments Disabled" id="updateCommentsDisabled"><br>
+            <input type="text" placeholder="Ratings Disabled" id="updateRatingsDisabled"><br>
+            <input type="text" placeholder="Description" id="updateDescription"><br>
+            <input type="text" placeholder="Country Name" id="updateCountryName"><br>
+            <input type="text" placeholder="Country Code" id="updateCountryCode"><br>
             <button onclick="updateData()">Update Data</button>
         </div>
 
@@ -61,20 +71,20 @@
 
 <script>
     function createData() {
-        var channelId = document.getElementById('createChannelId').value;
+        var channelTitle = document.getElementById('createchannelTitle').value;
         var videoTitle = document.getElementById('createVideoTitle').value;
         var categoryId = document.getElementById('createCategoryId').value;
         var tags = document.getElementById('createTags').value;
         var description = document.getElementById('createDescription').value;
         var countryName = document.getElementById('createCountryName').value;
 
-        fetch('your_create_endpoint', {
+        fetch('http://localhost:3002/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ 
-                channelId: channelId, 
+                channelTitle: channelTitle, 
                 videoTitle: videoTitle, 
                 categoryId: categoryId, 
                 tags: tags, 
@@ -99,8 +109,18 @@
         var categoryId = document.getElementById('updateCategoryId').value;
         var trendingDate = document.getElementById('updateTrendingDate').value;
         var tags = document.getElementById('updateTags').value;
+        var viewCount = document.getElementById('updateViewCount').value;
+        var likes = document.getElementById('updateLikes').value;
+        var dislikes = document.getElementById('updateDislikes').value;
+        var commentCount = document.getElementById('updateCommentCount').value;
+        var thumbnailLink = document.getElementById('updateThumbnailLink').value;
+        var commentsDisabled = document.getElementById('updateCommentsDisabled').value;
+        var ratingsDisabled = document.getElementById('updateRatingsDisabled').value;
+        var description = document.getElementById('updateDescription').value;
+        var countryName = document.getElementById('updateCountryName').value;
+        var countryCode = document.getElementById('updateCountryCode').value;
 
-        fetch('your_update_endpoint', {
+        fetch('http://localhost:3002/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -111,7 +131,17 @@
                 publishedAt: publishedAt, 
                 categoryId: categoryId, 
                 trendingDate: trendingDate, 
-                tags: tags 
+                tags: tags,
+                viewCount: viewCount,
+                likes: likes,
+                dislikes: dislikes,
+                commentCount: commentCount,
+                thumbnailLink: thumbnailLink,
+                commentsDisabled: commentsDisabled,
+                ratingsDisabled: ratingsDisabled,
+                description: description,
+                countryName: countryName,
+                countryCode: countryCode
             })
         })
         .then(response => response.json())
@@ -127,7 +157,7 @@
     function deleteData() {
         var videoId = document.getElementById('deleteVideoId').value;
 
-        fetch('your_delete_endpoint', {
+        fetch('http://localhost:3002/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
