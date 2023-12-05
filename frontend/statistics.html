@@ -5,6 +5,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styling */
+        .w3-top {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .w3-bar {
+            padding: 15px;
+        }
+
+        /* Content Section styling */
+        .w3-content {
+            padding:70px 20px 50px;
+            max-width: 1564px;
+            margin: auto;
+        }
+
+        .w3-container {
+            padding: 16px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #countrySelect {
+            width: 150px; 
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        #statistics input {
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        color: #333;
+        margin-right: 30px;
+    }
+
+    #statistics textarea {
+        height: 100px; 
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        color: #333;
+        margin-top: 10px; 
+        margin-right: 30px;
+    }
+    </style>
 </head>
 <body>
 
@@ -29,7 +119,7 @@
 
         <!-- Country Dropdown -->
         <div>
-            <label for="country">Select a Country:</label>
+            <label for="country">Country:</label>
             <select id="country" name="country">
                 <option value="Brazil">Brazil</option>
                 <option value="India">India</option>
@@ -39,16 +129,17 @@
                 <!-- Add more options as needed -->
             </select>
         </div>
-
+        <div style="margin-bottom: 20px;"></div>
         <!-- Search Bars -->
         <div>
             <label for="channelName">Channel Name:</label>
             <input type="text" id="channelName" name="channelName">
-        </div>
-        <div>
             <label for="tags">Tags:</label>
             <input type="text" id="tags" name="tags">
         </div>
+        <div>
+        </div>
+        <div style="margin-bottom: 20px;"></div>
         <button onclick="performSearch()">Search</button>
 
         <!-- Data Grid -->
@@ -69,7 +160,7 @@
         var channelName = document.getElementById('channelName').value;
         var tags = document.getElementById('tags').value;
 
-        fetch('http://localhost:3002/submit-data', {
+        fetch('http://localhost:3000/submit-data', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

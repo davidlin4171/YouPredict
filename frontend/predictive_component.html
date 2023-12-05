@@ -5,6 +5,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styling */
+        .w3-top {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .w3-bar {
+            padding: 15px;
+        }
+
+        /* Content Section styling */
+        .w3-content {
+            padding:70px 20px 50px;
+            max-width: 1564px;
+            margin: auto;
+        }
+
+        .w3-container {
+            padding: 16px;
+        }
+
+        #predictiveComponent label {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    #predictiveComponent input {
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        color: #333;
+        margin-right: 30px;
+    }
+
+    #predictiveComponent textarea {
+        height: 100px; 
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        color: #333;
+        margin-top: 10px; 
+        margin-right: 30px;
+    }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -16,7 +100,7 @@
             <a href="statistics.html" class="w3-bar-item w3-button">Statistics</a>
             <a href="crud.html" class="w3-bar-item w3-button">Crud</a>
             <a href="advanced_query.html" class="w3-bar-item w3-button">Advanced Query</a>
-            <a href="predictive_component.html" class="w3-bar-item w3-button">Predictive Component</a>
+            <a href="/predictive_component.html" class="w3-bar-item w3-button">Predictive Component</a>
         </div>
     </div>
 </div>
@@ -26,20 +110,19 @@
     <div class="w3-container w3-padding-32" id="predictiveComponent">
         <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Predicting View Count using Multiple Linear Regression</h3>
         <p>Please input these values (Country code is from 1 to 5): </p>
-        
+    
         <label for="likes">Likes</label>
-        <input type="number" id="likes" name="likes"><br>
-
+        <input type="number" id="likes" name="likes">
+    
         <label for="commentCount">Comment Count</label>
-        <input type="number" id="commentCount" name="commentCount"><br>
-
+        <input type="number" id="commentCount" name="commentCount">
+    
         <label for="countryCode">Country Code</label>
-        <input type="number" id="countryCode" name="countryCode"><br>
-
+        <input type="number" id="countryCode" name="countryCode">
+    
         <button onclick="calculateViewCount()">Calculate</button>
-
+    
         <p>Your Predicted View Count is:</p>
-        <textarea id="predictedViewCount"></textarea>
     </div>
 </div>
 

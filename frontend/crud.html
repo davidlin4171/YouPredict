@@ -5,6 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styling */
+        .w3-top {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .w3-bar {
+            padding: 15px;
+        }
+
+        /* Content Section styling */
+        .w3-content {
+            padding:70px 20px 50px;
+            max-width: 1564px;
+            margin: auto;
+        }
+
+        .w3-container {
+            padding: 16px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,48 +78,50 @@
 <!-- Crud Section -->
 <div class="w3-content w3-padding" style="max-width:1564px">
     <div class="w3-container w3-padding-32">
+        <div style="margin-bottom: 20px;"></div>
         <h3><b>CREATE</b></h3>
-        <div>
-            <input type="text" placeholder="Channel Title" id="createChannelTitle"><br>
-            <input type="text" placeholder="Video Title" id="createVideoTitle"><br>
-            <input type="number" placeholder="Category ID" id="createCategoryId"><br>
-            <input type="text" placeholder="Tags" id="createTags"><br>
-            <input type="text" placeholder="Description" id="createDescription"><br>
-            <input type="text" placeholder="Country Name" id="createCountryName"><br>
+        <div class="create-section">
+            <input type="text" placeholder="Channel Title" id="createChannelTitle">
+            <input type="text" placeholder="Video Title" id="createVideoTitle">
+            <input type="number" placeholder="Category ID" id="createCategoryId">
+            <input type="text" placeholder="Tags" id="createTags">
+            <input type="text" placeholder="Description" id="createDescription">
+            <input type="text" placeholder="Country Name" id="createCountryName">
             <button onclick="createData()">Create Data</button>
         </div>
 
         <h3><b>UPDATE</b></h3>
         <div>
-            <input type="text" placeholder="Video ID" id="updateVideoId"><br>
-            <input type="text" placeholder="Title" id="updateTitle"><br>
-            <input type="text" placeholder="Published At" id="updatePublishedAt"><br>
-            <input type="number" placeholder="Category ID" id="updateCategoryId"><br>
-            <input type="text" placeholder="Trending Date" id="updateTrendingDate"><br>
-            <input type="text" placeholder="Tags" id="updateTags"><br>
-            <input type="number" placeholder="View Count" id="updateViewCount"><br>
-            <input type="number" placeholder="Likes" id="updateLikes"><br>
-            <input type="number" placeholder="Dislikes" id="updateDislikes"><br>
-            <input type="number" placeholder="Comment Count" id="updateCommentCount"><br>
-            <input type="text" placeholder="Thumbnail Link" id="updateThumbnailLink"><br>
-            <input type="text" placeholder="Comments Disabled" id="updateCommentsDisabled"><br>
-            <input type="text" placeholder="Ratings Disabled" id="updateRatingsDisabled"><br>
-            <input type="text" placeholder="Description" id="updateDescription"><br>
-            <input type="text" placeholder="Country Name" id="updateCountryName"><br>
-            <input type="text" placeholder="Country Code" id="updateCountryCode"><br>
+            <input type="text" placeholder="Video ID" id="updateVideoId">
+            <input type="text" placeholder="Title" id="updateTitle">
+            <input type="text" placeholder="Published At" id="updatePublishedAt">
+            <input type="number" placeholder="Category ID" id="updateCategoryId">
+            <input type="text" placeholder="Trending Date" id="updateTrendingDate">
+            <input type="text" placeholder="Tags" id="updateTags">
+            <input type="number" placeholder="View Count" id="updateViewCount">
+            <input type="number" placeholder="Likes" id="updateLikes">
+            <input type="number" placeholder="Dislikes" id="updateDislikes">
+            <input type="number" placeholder="Comment Count" id="updateCommentCount">
+            <input type="text" placeholder="Thumbnail Link" id="updateThumbnailLink">
+            <input type="text" placeholder="Comments Disabled" id="updateCommentsDisabled">
+            <input type="text" placeholder="Ratings Disabled" id="updateRatingsDisabled">
+            <input type="text" placeholder="Description" id="updateDescription">
+            <input type="text" placeholder="Country Name" id="updateCountryName">
+            <input type="text" placeholder="Country Code" id="updateCountryCode">
             <button onclick="updateData()">Update Data</button>
         </div>
 
         <h3><b>DELETE</b></h3>
         <div>
-            <input type="text" placeholder="Video ID" id="deleteVideoId"><br>
+            <input type="text" placeholder="Video ID" id="deleteVideoId">
             <button onclick="deleteData()">Delete Data</button>
         </div>
+        <div style="margin-bottom: 20px;"></div>
     </div>
 </div>
 
 <!-- Footer -->
-<footer class="w3-center w3-black w3-padding-16">
+<footer class="w3-center w3-black">
     <p>Created by David, Daivaksh, Priyansh, and Navya</p>
 </footer>
 
@@ -78,7 +134,7 @@
         var description = document.getElementById('createDescription').value;
         var countryName = document.getElementById('createCountryName').value;
 
-        fetch('http://localhost:3002/create', {
+        fetch('http://localhost:3000/crud/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,7 +176,7 @@
         var countryName = document.getElementById('updateCountryName').value;
         var countryCode = document.getElementById('updateCountryCode').value;
 
-        fetch('http://localhost:3002/update', {
+        fetch('http://localhost:3000/crud/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -157,7 +213,7 @@
     function deleteData() {
         var videoId = document.getElementById('deleteVideoId').value;
 
-        fetch('http://localhost:3002/delete', {
+        fetch('http://localhost:3000/crud/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
