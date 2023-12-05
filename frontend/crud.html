@@ -80,7 +80,7 @@
     <div class="w3-container w3-padding-32">
         <div style="margin-bottom: 20px;"></div>
         <h3><b>CREATE</b></h3>
-        <div class="create-section">
+        <div>
             <input type="text" placeholder="Channel Title" id="createChannelTitle">
             <input type="text" placeholder="Video Title" id="createVideoTitle">
             <input type="number" placeholder="Category ID" id="createCategoryId">
@@ -127,7 +127,7 @@
 
 <script>
     function createData() {
-        var channelTitle = document.getElementById('createchannelTitle').value;
+        var channelTitle = document.getElementById('createChannelTitle').value;
         var videoTitle = document.getElementById('createVideoTitle').value;
         var categoryId = document.getElementById('createCategoryId').value;
         var tags = document.getElementById('createTags').value;

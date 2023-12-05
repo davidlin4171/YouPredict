@@ -100,7 +100,7 @@
             <a href="statistics.html" class="w3-bar-item w3-button">Statistics</a>
             <a href="crud.html" class="w3-bar-item w3-button">Crud</a>
             <a href="advanced_query.html" class="w3-bar-item w3-button">Advanced Query</a>
-            <a href="/predictive_component.html" class="w3-bar-item w3-button">Predictive Component</a>
+            <a href="predictive_component.html" class="w3-bar-item w3-button">Predictive Component</a>
         </div>
     </div>
 </div>
@@ -110,19 +110,20 @@
     <div class="w3-container w3-padding-32" id="predictiveComponent">
         <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Predicting View Count using Multiple Linear Regression</h3>
         <p>Please input these values (Country code is from 1 to 5): </p>
-    
+        
         <label for="likes">Likes</label>
         <input type="number" id="likes" name="likes">
-    
+
         <label for="commentCount">Comment Count</label>
         <input type="number" id="commentCount" name="commentCount">
-    
+
         <label for="countryCode">Country Code</label>
         <input type="number" id="countryCode" name="countryCode">
-    
+
         <button onclick="calculateViewCount()">Calculate</button>
-    
-        <p>Your Predicted View Count is:</p>
+
+        <p>Your Predicted View Count is: <span id = "predictedViewCount"></span></p>
+        <!-- <textarea id="predictedViewCount"></textarea> -->
     </div>
 </div>
 
