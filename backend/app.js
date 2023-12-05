@@ -23,7 +23,7 @@ var con = mysql.createConnection({
 
 con.connect(function(err) {
   if (err) throw err;
-  console.log("Connected!");
+  console.log("Connected to SQL!");
 });
 
 //con.query('SELECT * FROM category LIMIT 20', (error, results, fields) => {
@@ -49,7 +49,7 @@ app.post("/submit-data", function(req, res) {
   JOIN channel AS ch ON v.channel_id = ch.channel_id
   JOIN video_stats AS vs ON v.video_id = vs.video_id
   JOIN ChannelStatistics AS cs ON v.channel_id = cs.channel_id
-  WHERE v.country = ? AND ch.channel_title LIKE ? AND ca.tags LIKE ?;`, [country, '%'+channel+'%', '%'+tags+'%'], (err, results, fields) => {
+  WHERE v.country = ? AND ch.channel_title LIKE ? AND ca.tags LIKE ?;`, ['%'+country+'%', '%'+channel+'%', '%'+tags+'%'], (err, results, fields) => {
     if (err) throw err;
     console.log(results);
     res.json(results);
@@ -154,6 +154,12 @@ app.post('/advance-1', (req,res) => {
   const country = req.body.country;
   console.log(country);
   console.log("asdjksa");
+})
+
+app.post('/advance-2', (req,res) => {
+  const country = req.body.country;
+  console.log(country);
+  console.log("advance 2");
 })
 
 function generateRandomId() {
