@@ -5,6 +5,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styling */
+        .w3-top {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .w3-bar {
+            padding: 15px;
+        }
+
+        /* Content Section styling */
+        .w3-content {
+            padding:70px 20px 50px;
+            max-width: 1564px;
+            margin: auto;
+        }
+
+        .w3-container {
+            padding: 16px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        
+
+        #countrySelect {
+            width: 150px; 
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+            color: #333;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -51,7 +119,7 @@
         var description = "Select the most common categories that appear on YouTube’s trending page by selecting the categories that have appeared more than the average number of times each category has appeared on YouTube trending page since the last 20000 trending videos across 5 countries. Only considers videos that have been posted after 10-15-2023 (date can be changed). Output only has 5 rows.";
         document.getElementById('queryDescription').innerText = description;
 
-        fetch('http://localhost:3002/advance-1', {
+        fetch('http://localhost:3000/advance-1', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +140,7 @@
         var description = "The purpose of this SQL query is to get the average ratio of video views to likes for each channel, sorted in ascending order, and a list of up to 15 channel titles. In order to prevent division by zero, it filters to only include channels with videos that have at least one like. It also restricts the selection to channels with three or more videos. Further filtering these channels is done by using a HAVING condition, which selects only those with an average view-to-like ratio that is higher than the average ratio of views to likes for all videos (again, just liking videos). The result is a list of channels that not only have a higher engagement rate compared to the average but also have a significant presence on the platform in terms of content volume.";
         document.getElementById('queryDescription').innerText = description;
 
-        fetch('http://localhost:3002/advance-2', {
+        fetch('http://localhost:3000/advance-2', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
