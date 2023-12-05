@@ -110,7 +110,7 @@
 </div>
 
 <!-- Footer -->
-<footer class="w3-center w3-black w3-padding-16">
+<footer class="w3-center w3-black w3-padding-4">
     <p>Created by David, Daivaksh, Priyansh, and Navya</p>
 </footer>
 
@@ -119,7 +119,7 @@
         var description = "Select the most common categories that appear on YouTube’s trending page by selecting the categories that have appeared more than the average number of times each category has appeared on YouTube trending page since the last 20000 trending videos across 5 countries. Only considers videos that have been posted after 10-15-2023 (date can be changed). Output only has 5 rows.";
         document.getElementById('queryDescription').innerText = description;
 
-        fetch('http://localhost:3002/advance-1', {
+        fetch('http://localhost:3000/advance-1', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -140,7 +140,7 @@
         var description = "The purpose of this SQL query is to get the average ratio of video views to likes for each channel, sorted in ascending order, and a list of up to 15 channel titles. In order to prevent division by zero, it filters to only include channels with videos that have at least one like. It also restricts the selection to channels with three or more videos. Further filtering these channels is done by using a HAVING condition, which selects only those with an average view-to-like ratio that is higher than the average ratio of views to likes for all videos (again, just liking videos). The result is a list of channels that not only have a higher engagement rate compared to the average but also have a significant presence on the platform in terms of content volume.";
         document.getElementById('queryDescription').innerText = description;
 
-        fetch('http://localhost:3002/advance-2', {
+        fetch('http://localhost:3000/advance-2', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
