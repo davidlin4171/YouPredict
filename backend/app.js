@@ -36,24 +36,29 @@ app.get("/", function(req, res){
 });
 
 app.post("/submit-data", function(req, res) {
-  console.log("askdjasnkjd");
   country = req.body.country;
   channel = req.body.channelName;
   tags = req.body.tags;
+  console.log(country);
+  console.log(channel);
+  console.log(tags);
 //Show Title, PublishedAt, channelTitle, categoryID, treding_date, tags, view_count, likes, comment_count, description,
-  con.query(`SELECT v.video_id, v.publishedAt, v.title, v.description, ca.categoryId, ca.tags,ch.channel_title, vs.trending_date, vs.view_count, vs.likes, vs.comment_count
+  con.query(`SELECT v.video_id, v.publishedAt, v.title, v.description, ca.categoryId, ca.tags,ch.channel_title, vs.trending_date, vs.view_count, vs.likes, vs.comment_count, cs.avgLikes, cs.avgViews, cs.avgComments
   FROM video AS v
   JOIN category AS ca ON v.video_id = ca.video_id
   JOIN channel AS ch ON v.channel_id = ch.channel_id
   JOIN video_stats AS vs ON v.video_id = vs.video_id
+  JOIN ChannelStatistics AS cs ON v.channel_id = cs.channel_id
   WHERE v.country = ? AND ch.channel_title LIKE ? AND ca.tags LIKE ?;`, [country, '%'+channel+'%', '%'+tags+'%'], (err, results, fields) => {
     if (err) throw err;
     console.log(results);
+    res.json(results);
   });
 });
 
 // Inserts a video and all its information into the corresponding sql tables
 app.post("/crud/create", (req, res) => {
+  console.log("askjdas");
   const channelTitle = req.body.channelTitle;
   const videoTitle = req.body.videoTitle;
   const categoryId = req.body.categoryId;
