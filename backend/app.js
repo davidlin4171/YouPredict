@@ -153,6 +153,7 @@ app.post("/crud/update", (req, res) => {
 app.post('/advance-1', (req,res) => {
   const country = req.body.country;
   console.log(country);
+  console.log("asdjksa");
 })
 
 function generateRandomId() {
