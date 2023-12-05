@@ -167,7 +167,9 @@
             },
             body: JSON.stringify({ country: selectedCountry, channelName: channelName, tags: tags })
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log(response.json());
+        } )
         .then(data => {
             // Handle the response data
             console.log('Search data:', data);
@@ -175,6 +177,8 @@
         .catch(error => {
             console.error('Error:', error);
         });
+        document.getElementById('channelName').value = '';
+        document.getElementById('tags').value = '';
     }
 </script>
 

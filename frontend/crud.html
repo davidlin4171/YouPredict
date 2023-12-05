@@ -156,6 +156,14 @@
         .catch(error => {
             console.error('Error:', error);
         });
+
+        document.getElementById('createChannelTitle').value = '';
+        document.getElementById('createVideoTitle').value = '';
+        document.getElementById('createCategoryId').value = '';
+        document.getElementById('createTags').value = '';
+        document.getElementById('createDescription').value = '';
+        document.getElementById('createCountryName').value = '';
+
     }
 
     function updateData() {
@@ -208,6 +216,24 @@
         .catch(error => {
             console.error('Error:', error);
         });
+
+        document.getElementById('updateVideoId').value = '';
+        document.getElementById('updateTitle').value = '';
+        document.getElementById('updatePublishedAt').value = '';
+        document.getElementById('updateCategoryId').value = '';
+        document.getElementById('updateTrendingDate').value = '';
+        document.getElementById('updateTags').value = '';
+        document.getElementById('updateViewCount').value = '';
+        document.getElementById('updateLikes').value = '';
+        document.getElementById('updateDislikes').value = '';
+        document.getElementById('updateCommentCount').value = '';
+        document.getElementById('updateThumbnailLink').value = '';
+        document.getElementById('updateCommentsDisabled').value = '';
+        document.getElementById('updateRatingsDisabled').value = '';
+        document.getElementById('updateDescription').value = '';
+        document.getElementById('updateCountryName').value = '';
+        document.getElementById('updateCountryCode').value = '';
+
     }
 
     function deleteData() {
@@ -228,6 +254,7 @@
         .catch(error => {
             console.error('Error:', error);
         });
+        document.getElementById('deleteVideoId').value = '';
     }
 </script>
 
