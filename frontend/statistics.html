@@ -59,7 +59,7 @@
             width: 100%;
         }
 
-        #countrySelect {
+        #country {
             width: 150px; 
             padding: 8px;
             box-sizing: border-box;
@@ -207,6 +207,7 @@
         var channelName = document.getElementById('channelName').value;
         var tags = document.getElementById('tags').value;
         document.getElementById('dataTable').getElementsByTagName('tbody')[0].innerHTML = '';
+
         fetch('http://localhost:3000/submit-data', {
             method: 'POST',
             headers: {

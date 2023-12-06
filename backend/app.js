@@ -58,7 +58,6 @@ app.post("/submit-data", function(req, res) {
 
 // Inserts a video and all its information into the corresponding sql tables
 app.post("/crud/create", (req, res) => {
-  console.log("askjdas");
   const channelTitle = req.body.channelTitle;
   const videoTitle = req.body.videoTitle;
   const categoryId = req.body.categoryId;
@@ -153,13 +152,58 @@ app.post("/crud/update", (req, res) => {
 app.post('/advance-1', (req,res) => {
   const country = req.body.country;
   console.log(country);
-  console.log("asdjksa");
+  let query = `SELECT categoryId, SUM(times_trending) AS num_trending
+  FROM video NATURAL JOIN (SELECT video_id, COUNT(video_id) AS times_trending
+                           FROM video_stats natural join video
+                           WHERE publishedAt > '2023-10-15 00:00:00' and country = ?
+                           GROUP BY video_id) AS tt NATURAL JOIN category
+  GROUP BY categoryId
+  HAVING SUM(times_trending) > (SELECT AVG(b.num_trending)
+                                FROM (SELECT SUM(a.times_trending) AS num_trending
+                                      FROM (SELECT video_id, COUNT(video_id) AS times_trending
+                                            FROM video_stats natural join video
+                                            WHERE publishedAt > '2023-10-15 00:00:00' and country = ?
+                                            GROUP BY video_id) AS a NATURAL JOIN category
+                                      GROUP BY categoryId) AS b)
+  ORDER BY num_trending DESC;`;
+
+  con.query(query, [country, country], (error, results, fields) => {
+    if (error) throw error;
+    console.log(results);
+    res.json(results);
+  });
+
 })
 
 app.post('/advance-2', (req,res) => {
   const country = req.body.country;
   console.log(country);
-  console.log("advance 2");
+  let query = `SELECT c.channel_title, 
+  AVG(vs.view_count/vs.likes) AS avg_likes_ratio
+  FROM 
+    channel c
+  JOIN 
+    video v ON c.channel_id = v.channel_id
+  JOIN 
+    video_stats vs ON v.video_id = vs.video_id
+  Where v.country = ? and vs.likes > 0 and c.channel_id in (select channel_id
+                      from channel natural join video natural join video_stats
+                      group by channel_id
+                      having count(channel_id) >= 3)
+  GROUP BY 
+    c.channel_id
+  HAVING 
+    AVG(vs.view_count/vs.likes) > (SELECT AVG(view_count/likes) FROM video_stats natural join video
+  Where likes > 0 and country = ?)
+  ORDER BY 
+    avg_likes_ratio
+  LIMIT 15;
+  `;
+  con.query(query, [country, country], (error, results, fields) => {
+    if (error) throw error;
+    console.log(results);
+    res.json(results);
+  });
 })
 
 function generateRandomId() {
