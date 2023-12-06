@@ -18,7 +18,8 @@ var con = mysql.createConnection({
   host: "35.188.105.245",
   user: "nddp-095",
   password: "apples",
-  database: "youtube_trending_data"
+  database: "youtube_trending_data",
+  charset: 'utf8mb4'
 });
 
 con.connect(function(err) {
@@ -32,10 +33,12 @@ con.connect(function(err) {
 //});
 
 app.get("/", function(req, res){
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send({title: 'YouTube Trending Data'})
 });
 
 app.post("/submit-data", function(req, res) {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
   country = req.body.country;
   channel = req.body.channelName;
   tags = req.body.tags;
