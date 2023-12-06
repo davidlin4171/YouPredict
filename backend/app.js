@@ -19,7 +19,8 @@ var con = mysql.createConnection({
   host: "35.188.105.245",
   user: "nddp-095",
   password: "apples",
-  database: "youtube_trending_data"
+  database: "youtube_trending_data",
+  charset: 'utf8mb4'
 });
 
 con.connect(function(err) {
@@ -32,27 +33,8 @@ con.connect(function(err) {
 //  console.log(results)
 //});
 
-app.get("/", function(req, res){
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
-});
-
-app.get("/statistics", function(req, res){
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'statistics.html'));
-});
-
-app.get("/advanced-query", function(req, res){
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'advanced-query.html'));
-});
-
-app.get("/crud", function(req, res){
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'crud.html'));
-});
-
-app.get("/predictive-component", function(req, res){
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'predictive-component.html'));
-});
-
 app.post("/submit-data", function(req, res) {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
   country = req.body.country;
   channel = req.body.channelName;
   tags = req.body.tags;
