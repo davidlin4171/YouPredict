@@ -181,7 +181,6 @@
         var ratingsDisabled = document.getElementById('updateRatingsDisabled').value;
         var description = document.getElementById('updateDescription').value;
         var countryName = document.getElementById('updateCountryName').value;
-        var countryCode = document.getElementById('updateCountryCode').value;
 
         fetch('http://localhost:3000/crud/update', {
             method: 'POST',
@@ -204,7 +203,6 @@
                 ratingsDisabled: ratingsDisabled,
                 description: description,
                 countryName: countryName,
-                countryCode: countryCode
             })
         })
         .then(response => response.json())
@@ -231,7 +229,6 @@
         document.getElementById('updateRatingsDisabled').value = '';
         document.getElementById('updateDescription').value = '';
         document.getElementById('updateCountryName').value = '';
-        document.getElementById('updateCountryCode').value = '';
 
     }
 
