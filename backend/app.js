@@ -36,6 +36,22 @@ app.get("/", function(req, res){
   res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
+app.get("/statistics", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'statistics.html'));
+});
+
+app.get("/advanced-query", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'advanced-query.html'));
+});
+
+app.get("/crud", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'crud.html'));
+});
+
+app.get("/predictive-component", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'predictive-component.html'));
+});
+
 app.post("/submit-data", function(req, res) {
   country = req.body.country;
   channel = req.body.channelName;
