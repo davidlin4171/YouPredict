@@ -57,6 +57,7 @@ app.get("/predictive_component", function(req, res){
   res.sendFile(path.join(__dirname, '..', 'frontend', 'predictive_component.html'));
 });
 
+
 app.post("/submit-data", function(req, res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   country = req.body.country;
