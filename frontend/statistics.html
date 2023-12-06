@@ -96,6 +96,7 @@
     }
     /* css for displaying data */
     table {
+        display: none;
             width: 100%;
             border-collapse: collapse;
     }
@@ -185,6 +186,8 @@
                         <th>Avg Channel Likes</th>
                         <th>Avg Channel Views</th>
                         <th>Avg Channel Comments</th>
+                        <th>Total Videos</th>
+                        <th>Max View Count</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -203,6 +206,14 @@
 
 <script>
     function performSearch() {
+        // hide table until time
+        var table = document.getElementById("dataTable");
+        if (table.style.display != "none") {
+            table.style.display = "table";
+        } else {
+            table.style.display = "table";
+        }
+
         var selectedCountry = document.getElementById('country').value;
         var channelName = document.getElementById('channelName').value;
         var tags = document.getElementById('tags').value;
@@ -295,6 +306,12 @@
 
                 const cell15 = row.insertCell(14);
                 cell15.textContent = parseFloat(data[i].avgComments.toFixed(2));
+                
+                const cell16 = row.insertCell(15);
+                cell16.textContent = data[i].total_videos;
+
+                const cell17 = row.insertCell(16);
+                cell17.textContent = data[i].max_view_count;
             }
         })
         .catch(error => {
