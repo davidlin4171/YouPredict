@@ -137,6 +137,7 @@ app.post("/crud/delete", (req, res) => {
 
 // Update video by whatever category
 app.post("/crud/update", (req, res) => {
+  console.log("hi");
   const videoId = req.body.videoId;
   if (!videoId) {
     videoId = 'asjkdnfjasdbfjsabfdafbasdfb';
