@@ -72,6 +72,37 @@
             color: #333;
             margin-right: 10px;
         }
+
+        /* cs for table of advanced query 1 */
+        #query1Table {
+            margin-left: 50px;
+            width: 40%;
+            border-collapse: collapse;
+            display: none;
+        }
+
+        /* css for tbale of advanced query 2 */
+        #query2Table {
+            margin-left: 50px;
+            width: 40%;
+            border-collapse: collapse;
+            display: none;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .scroll-Table {
+            overflow-x: auto; /* Enable horizontal scrollbar when needed */
+            max-width: 100%; /* Set a max-width if necessary */
+        }
     </style>
 </head>
 <body>
@@ -109,17 +140,57 @@
     </div>
 </div>
 
-<!-- Footer -->
-<footer class="w3-center w3-black w3-padding-4">
-    <p>Created by David, Daivaksh, Priyansh, and Navya</p>
-</footer>
+<!-- table of advanced query 1 -->
+<table id="query1Table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Times Trending</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
+
+<!-- table of advanced query 2 -->
+<table id="query2Table">
+    <thead>
+        <tr>
+            <th>Channel Title</th>
+            <th>Average Number of Views Per Like</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
+
 
 <script>
     function advancedQuery1() {
+        //clear table 1 and 2
+        document.getElementById('query2Table').getElementsByTagName('tbody')[0].innerHTML = '';
+        document.getElementById('query1Table').getElementsByTagName('tbody')[0].innerHTML = '';
+
+        // hide table 2 after selecting advanced query 2
+        document.getElementById("query2Table").style.display = 'none';
+
+        // display the table
+        var table = document.getElementById("query1Table");
+        if (table.style.display != "none") {
+            table.style.display = "table";
+        } else {
+            table.style.display = "table";
+        }
+        const tableBody = table.getElementsByTagName('tbody')[0];
+
+        // query description
         var description = "Select the most common categories that appear on YouTube’s trending page by selecting the categories that have appeared more than the average number of times each category has appeared on YouTube trending page since the last 20000 trending videos across 5 countries. ";
         document.getElementById('queryDescription').innerText = description;
         var selectedCountry = document.getElementById('countrySelect').value;
         
+        // send post request
         fetch('http://localhost:3000/advance-1', {
             method: 'POST',
             headers: {
@@ -131,6 +202,15 @@
         .then(data => {
             console.log('Advanced Query 1 data:', data);
             // Handle the response data
+            for (let i = 0; i < data.length; i++) {
+                const row = tableBody.insertRow();
+
+                const cell1 = row.insertCell(0);
+                cell1.textContent = data[i].categoryId;
+
+                const cell2 = row.insertCell(1);
+                cell2.textContent = data[i].num_trending;
+            }
         })
         .catch(error => {
             console.error('Error:', error);
@@ -138,9 +218,29 @@
     }
 
     function advancedQuery2() {
+        //clear table 1 and 2
+        document.getElementById('query2Table').getElementsByTagName('tbody')[0].innerHTML = '';
+        document.getElementById('query1Table').getElementsByTagName('tbody')[0].innerHTML = '';
+
+        // hide table 2 after selecting advanced query 2
+        document.getElementById("query1Table").style.display = 'none';
+
+        // display data for table 2
+        var table = document.getElementById("query2Table");
+        if (table.style.display != "none") {
+            table.style.display = "table";
+        } else {
+            table.style.display = "table";
+        }
+        const tableBody = table.getElementsByTagName('tbody')[0];
+
+        // query description
         var description = "The purpose of this SQL query is to get the average ratio of video views to likes for each channel, sorted in ascending order, and a list of up to 15 channel titles. In order to prevent division by zero, it filters to only include channels with videos that have at least one like. It also restricts the selection to channels with three or more videos. Further filtering these channels is done by using a HAVING condition, which selects only those with an average view-to-like ratio that is higher than the average ratio of views to likes for all videos (again, just liking videos). The result is a list of channels that not only have a higher engagement rate compared to the average but also have a significant presence on the platform in terms of content volume.";
         document.getElementById('queryDescription').innerText = description;
+
         var countrySelect = document.getElementById('countrySelect').value;
+
+        // send post request
         fetch('http://localhost:3000/advance-2', {
             method: 'POST',
             headers: {
@@ -151,7 +251,15 @@
         .then(response => response.json())
         .then(data => {
             console.log('Advanced Query 2 data:', data);
-            // Handle the response data
+            for (let i = 0; i < data.length; i++) {
+                const row = tableBody.insertRow();
+
+                const cell1 = row.insertCell(0);
+                cell1.textContent = data[i].channel_title;
+
+                const cell2 = row.insertCell(1);
+                cell2.textContent = data[i].avg_likes_ratio;
+            }
         })
         .catch(error => {
             console.error('Error:', error);

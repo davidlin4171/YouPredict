@@ -43,7 +43,7 @@ app.post("/submit-data", function(req, res) {
   console.log(channel);
   console.log(tags);
 //Show Title, PublishedAt, channelTitle, categoryID, treding_date, tags, view_count, likes, comment_count, description,
-  con.query(`SELECT v.video_id, v.publishedAt, v.title, v.description, ca.categoryId, ca.tags,ch.channel_title, vs.trending_date, vs.view_count, vs.likes, vs.comment_count, cs.avgLikes, cs.avgViews, cs.avgComments
+  con.query(`SELECT v.video_id, v.publishedAt, v.title, v.description, ca.categoryId, ca.tags,ch.channel_title, vs.trending_date, vs.view_count, vs.likes, vs.comment_count, cs.avgLikes, cs.avgViews, cs.avgComments, cs.total_videos, cs.max_view_count
   FROM video AS v
   JOIN category AS ca ON v.video_id = ca.video_id
   JOIN channel AS ch ON v.channel_id = ch.channel_id
@@ -103,7 +103,7 @@ app.post("/crud/create", (req, res) => {
       if(error) throw error;
     });
   });
-  let storedProcedure = `call CalculateChannelStatistics`;
+  let storedProcedure = `call GetChannelStatistics`;
   con.query(storedProcedure, (error, results, fields) => {
     if (error) throw error;
   });
