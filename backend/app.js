@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const lodash = require("lodash");
 const mysql = require("mysql2");
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 
@@ -31,11 +32,6 @@ con.connect(function(err) {
 //  if(error) throw error;
 //  console.log(results)
 //});
-
-app.get("/", function(req, res){
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.send({title: 'YouTube Trending Data'})
-});
 
 app.post("/submit-data", function(req, res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
