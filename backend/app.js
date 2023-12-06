@@ -33,6 +33,31 @@ con.connect(function(err) {
 //  console.log(results)
 //});
 
+app.get("/", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
+});
+
+app.get("/index", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
+});
+
+app.get("/statistics", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'statistics.html'));
+});
+
+app.get("/advanced_query", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'advanced_query.html'));
+});
+
+app.get("/crud", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'crud.html'));
+});
+
+app.get("/predictive_component", function(req, res){
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'predictive_component.html'));
+});
+
+
 app.post("/submit-data", function(req, res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   country = req.body.country;
@@ -42,7 +67,7 @@ app.post("/submit-data", function(req, res) {
   console.log(channel);
   console.log(tags);
 //Show Title, PublishedAt, channelTitle, categoryID, treding_date, tags, view_count, likes, comment_count, description,
-  con.query(`SELECT v.video_id, v.publishedAt, v.title, v.description, ca.categoryId, ca.tags,ch.channel_title, vs.trending_date, vs.view_count, vs.likes, vs.comment_count, cs.avgLikes, cs.avgViews, cs.avgComments, cs.total_videos, cs.max_view_count
+  con.query(`SELECT v.video_id, v.publishedAt, v.title, v.description, ca.categoryId, ca.tags,ch.channel_title, vs.trending_date, vs.view_count, vs.likes, vs.comment_count, cs.avgLikes, cs.avgViews, cs.avgComments, cs.total_videos, cs.max_view_count, cs.popularity_level
   FROM video AS v
   JOIN category AS ca ON v.video_id = ca.video_id
   JOIN channel AS ch ON v.channel_id = ch.channel_id
