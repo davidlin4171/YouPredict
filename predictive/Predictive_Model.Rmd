@@ -1,0 +1,145 @@
+---
+title: "Predictive Model for YouTrend"
+author: "Daivaksh Patel"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r warning=FALSE}
+# load necessary packages
+library(tidyverse)
+library(gridExtra)
+library(lmtest)
+```
+
+## Gathering and cleaning/validating dataset
+
+```{r}
+# Load the 'grades.csv' data set
+bra = read.csv("BR_youtube_trending_data.csv")
+usa = read.csv("US_youtube_trending_data (3).csv")
+can = read.csv("CA_youtube_trending_data.csv")
+ind = read.csv("IN_youtube_trending_data.csv")
+jpn = read.csv("JP_youtube_trending_data.csv")
+```
+
+
+```{r}
+# Looking at the structure of the data
+dim(bra)
+dim(usa)
+dim(can)
+dim(ind)
+dim(jpn)
+```
+```{r}
+colnames(bra)
+```
+
+```{r}
+str(bra)
+```
+
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+
+bra$publishedAt <- as.Date(bra$publishedAt)
+bra %>%
+  group_by(publishedAt) %>%
+  summarize(AvgViewCount = mean(view_count, na.rm = TRUE)) %>%
+  ggplot(aes(x = publishedAt, y = AvgViewCount)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Average View Count per Day", x = "Published Date", y = "Average View Count")
+
+```
+
+```{r}
+bra %>%
+  group_by(channelTitle) %>%
+  summarize(AvgViewCount = mean(view_count, na.rm = TRUE)) %>%
+  top_n(10, AvgViewCount) %>%
+  ggplot(aes(x = reorder(channelTitle, AvgViewCount), y = AvgViewCount)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  coord_flip() +
+  labs(title = "Top 10 Channels by Average View Count", x = "Channel Title", y = "Average View Count")
+
+```
+```{r}
+bra %>%
+  group_by(categoryId) %>%
+  summarize(AvgViewCount = mean(view_count, na.rm = TRUE)) %>%
+  ggplot(aes(x = factor(categoryId), y = AvgViewCount)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Average View Count per Category", x = "Category ID", y = "Average View Count")
+```
+```{r}
+ggplot(bra, aes(x = comment_count, y = view_count)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_minimal() +
+  labs(title = "Comment Count and View Count", x = "Comment Count", y = "View Count")
+```
+
+## Understanding the full Multiple Linear Regression model
+
+```{r}
+# Merging the datasets
+data <- rbind(bra, usa, can, jpn, ind)
+
+# View the structure of the merged dataset
+dim(data)
+```
+
+
+#### MLR model to predict final exam grades by including all prediction variables
+```{r warning=FALSE}
+data$countryName <- factor(data$countryName)
+```
+
+
+```{r warning=FALSE}
+# Now create the linear model
+full_model <- lm(view_count ~ likes + comment_count + countryCode, data = data)
+
+# View the summary of the model
+summary(full_model)
+```
+
+## Model Diagnostics
+
+#### Checking whether variance assumption is met
+
+```{r warning=FALSE}
+plot(full_model, which=1)
+```
+
+#### Interpreting the coefficient of multiple determination R^2.
+
+We can get the value of the R^2 from the summary
+ 
+```{r}
+summary(full_model)$r.squared
+```
+
+The R^2 value of 80.41% means that approximately 80.41% of the variability in view_count can be explained by the linear relationship between the response variable and the predictor variables.
+
+```{r}
+summary(full_model)$fstatistic
+```
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
