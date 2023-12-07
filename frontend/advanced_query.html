@@ -59,8 +59,6 @@
             width: 100%;
         }
 
-        
-
         #countrySelect {
             width: 150px; 
             padding: 8px;
@@ -72,6 +70,7 @@
             color: #333;
             margin-right: 10px;
         }
+
 
         /* cs for table of advanced query 1 */
         #query1Table {
@@ -102,6 +101,9 @@
         .scroll-Table {
             overflow-x: auto; /* Enable horizontal scrollbar when needed */
             max-width: 100%; /* Set a max-width if necessary */
+        }
+        #categoryDescription {
+            margin-left: 50px;
         }
     </style>
 </head>
@@ -152,7 +154,7 @@
        
     </tbody>
 </table>
-
+<div id="categoryDescription" style="margin-top: 20px;"></div>
 <!-- table of advanced query 2 -->
 <table id="query2Table">
     <thead>
@@ -186,10 +188,44 @@
         const tableBody = table.getElementsByTagName('tbody')[0];
 
         // query description
-        var description = "Select the most common categories that appear on YouTube’s trending page by selecting the categories that have appeared more than the average number of times each category has appeared on YouTube trending page since the last 20000 trending videos across 5 countries. ";
+        var description = `Select the most common categories that appear on YouTube’s trending page by selecting the categories that have appeared more than the average number of times each category has appeared on YouTube trending page since the last 20000 trending videos across 5 countries.
+        `;
         document.getElementById('queryDescription').innerText = description;
         var selectedCountry = document.getElementById('countrySelect').value;
-        
+        var category = `CategoryIds:
+        1: Autos & Vehicles 
+        2: Music 
+        3: Pets and Animals
+        4: Sports
+        5: Short Movies
+        6: Travel & Events
+        7: Gaming
+        8: Videoblogging
+        9: People & Blogs
+        10: Comedy
+        11: Entertainment
+        12: News & Politics
+        13: Howto & Style
+        14: Education
+        15: Science and Technology
+        16: NonProfit & Activisim
+        17: Movies
+        18: Anime/Animation
+        19: Action/Adventure
+        20: Classics
+        21: Comedy
+        22: Documentary
+        23: Drama
+        24: Family
+        25: Foreign
+        26: Horror
+        27: Sci-Fi/Fantasy
+        28: Thriller
+        29: Shorts
+        30: Shows
+        31: Trailers`;
+        document.getElementById('categoryDescription').innerText = category;
+
         // send post request
         fetch('http://localhost:3000/advance-1', {
             method: 'POST',
@@ -218,6 +254,7 @@
     }
 
     function advancedQuery2() {
+        document.getElementById('categoryDescription').innerText = '';
         //clear table 1 and 2
         document.getElementById('query2Table').getElementsByTagName('tbody')[0].innerHTML = '';
         document.getElementById('query1Table').getElementsByTagName('tbody')[0].innerHTML = '';
