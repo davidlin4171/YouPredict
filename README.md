@@ -1,1 +1,3 @@
-# fa23-cs411-team095-NDDP
+Hosted on GCP
+
+- To run locally, cd into backend and run node app.js

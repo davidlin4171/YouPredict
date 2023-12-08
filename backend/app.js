@@ -140,6 +140,10 @@ app.post("/crud/delete", (req, res) => {
   con.query(delete_query, videoId, (error, results, fields) => {
     if(error) throw error;
   });
+  let storedProcedure = `call GetChannelStatistics`;
+  con.query(storedProcedure, (error, results, fields) => {
+    if (error) throw error;
+  });
 });
 
 // Update video by whatever category
@@ -168,7 +172,7 @@ app.post("/crud/update", (req, res) => {
   updateVideo(videoId, title, publishedAt, thumbnailLink, description, countryName);
   updateVideoStats(trendingDate, videoId, viewCount, likes, dislikes, commentCount, commentsDisabled, ratingsDisabled);
   updateCategory(cateogryId, videoId, tags);
-  let storedProcedure = `call CalculateChannelStatistics`;
+  let storedProcedure = `call GetChannelStatistics`;
   con.query(storedProcedure, (error, results, fields) => {
     if (error) throw error;
   });
